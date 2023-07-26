@@ -1,0 +1,43 @@
+Create database UNICompany
+
+use UNICompany
+
+CREATE TABLE DatoCentro (
+Id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+Nombre  VARCHAR (50) NOT NULL,
+Ciudad VARCHAR (50) NOT NULL,
+
+);
+
+CREATE TABLE Directivo (
+Id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+Tipo  BIT NOT NULL,
+PrestacionCombustible BIT NOT NULL,
+Id_DatoCentro INT NOT NULL,
+
+CONSTRAINT fk_DatoCentro FOREIGN KEY (Id_DatoCentro) REFERENCES DatoCentro (Id)
+
+);
+
+CREATE TABLE CentroTrabajo (
+Id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+Puesto CHAR (10) NOT NULL,
+DescripcionPuesto VARCHAR(30) NOT NULL,
+Id_Directivo INT NOT NULL,
+
+CONSTRAINT fk_Directivo FOREIGN KEY (Id_Directivo) REFERENCES Directivo (Id)
+
+);
+
+CREATE TABLE Empleados (
+Id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
+Nombre VARCHAR(30) NOT NULL,
+A_Paterno VARCHAR(30) NOT NULL,
+A_Materno VARCHAR (30) NOT NULL,
+F_Nacimiento DATETIME NOT NULL,
+RFC VARCHAR (30) NOT NULL,
+Id_CentroTrabajo INT NOT NULL,
+
+CONSTRAINT fk_CentroTrabajo FOREIGN KEY (Id_CentroTrabajo) REFERENCES CentroTrabajo (Id)
+
+);
